@@ -35,6 +35,7 @@ fastapi_blank_template/
 ├── .env.example            # 环境变量示例 (可选 / Optional)
 ├── .env                    # 环境变量 (可选 / Optional, 被 .gitignore 忽略)
 ├── .gitignore              # Git忽略文件
+├── .gitattributes          # Git配置文件
 ├── Dockerfile              # Docker配置 (可选 / Optional)
 ├── README.md               # 项目说明
 └── requirements.txt        # 依赖项
