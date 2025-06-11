@@ -57,9 +57,9 @@ fastapi_blank_template/
 └── requirements.txt        # 依赖项
 ```
 
-> **注意/Note:** 在最小结构中，所有路由都直接定义在 main.py 文件中，无需使用单独的 api 目录。需要注释或删除 main.py 中引入外部路由的代码（如 `from app.api.v1 import router as api_router` 和 `app.include_router(api_router, prefix="/api/v1")`），改为直接在 main.py 中定义路由。随着项目增长，再考虑将路由分离到 api 目录下。
+> **注意/Note:** 在最小结构中，所有路由都直接定义在 main.py 文件中，无需使用单独的 api 目录。需要注释或删除 main.py 中引入外部路由的代码（如 `from app.api.v1 import router as api_router` 和 `app.include_router(api_router, prefix="/api/v1")`），改为直接在 main.py 中定义路由。
 >
-> In the minimal structure, all routes are defined directly in the main.py file, without using a separate api directory. You need to comment out or remove the code in main.py that imports external routers (such as `from app.api.v1 import router as api_router` and `app.include_router(api_router, prefix="/api/v1")`). As the project grows, consider moving routes to the api directory.
+> In the minimal structure, all routes are defined directly in the main.py file, without using a separate api directory. You need to comment out or remove the code in main.py that imports external routers (such as `from app.api.v1 import router as api_router` and `app.include_router(api_router, prefix="/api/v1")`).
 
 ## 目录说明 / Directory Explanation
 
