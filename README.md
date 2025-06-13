@@ -1,6 +1,6 @@
 # FastAPI 项目空白模板 / FastAPI Project Blank Template
 
-一个为中小型项目设计的 FastAPI 空白模板，提供了清晰的项目结构。
+一个为中小型项目设计的 FastAPI 空白模板，提供了清晰的项目结构，符合个人习惯。
 
 A blank template for FastAPI projects designed for small to medium-sized applications, providing a clear project structure.
 
@@ -9,34 +9,30 @@ A blank template for FastAPI projects designed for small to medium-sized applica
 ```
 fastapi_blank_template/
 ├── app/                    # 应用主目录
-│   ├── api/                # API路由层 (可选 / Optional)
+│   ├── api/                # API路由层
 │   │   └── v1/             # API版本1
 │   │       ├── __init__.py # 路由注册
 │   │       └── hello.py    # 示例路由
-│   ├── core/               # 核心配置 (可选 / Optional)
-│   │   ├── __init__.py
-│   │   └── config.py       # 应用配置
-│   ├── crud/               # 数据库CRUD操作 (可选 / Optional)
-│   ├── db/                 # 数据库连接和会话 (可选 / Optional)
-│   ├── deps/               # 依赖项（认证、权限等）(可选 / Optional)
-│   ├── exceptions/         # 自定义异常和异常处理 (可选 / Optional)
-│   ├── middlewares/        # 自定义中间件 (可选 / Optional)
-│   ├── models/             # ORM模型（SQLAlchemy等）(可选 / Optional)
-│   ├── schemas/            # Pydantic模型 (可选 / Optional)
-│   ├── services/           # 业务逻辑层 (可选 / Optional)
-│   ├── tasks/              # 异步任务 (可选 / Optional)
-│   ├── utils/              # 通用工具函数 (可选 / Optional)
+│   ├── crud/               # 数据库CRUD操作
+│   ├── db_core/            # 数据库连接和会话
+│   ├── dependencies/       # 依赖项（认证、权限等）
+│   │   └── auth/           # 认证相关依赖
+│   ├── entities/           # ORM模型（SQLAlchemy等）
+│   ├── exceptions/         # 自定义异常和异常处理
+│   ├── middlewares/        # 自定义中间件
+│   ├── schemas/            # Pydantic模型
+│   ├── services/           # 业务逻辑层
+│   ├── settings/           # 配置相关
+│   ├── tasks/              # 异步任务
+│   ├── utils/              # 通用工具函数
 │   ├── __init__.py
 │   └── main.py             # 应用入口
-├── docs/                   # 项目文档 (可选 / Optional)
-├── migrations/             # 数据库迁移文件 (可选 / Optional)
-├── static/                 # 静态文件 (可选 / Optional)
-├── tests/                  # 测试用例 (可选 / Optional)
-├── .env.example            # 环境变量示例 (可选 / Optional)
-├── .env                    # 环境变量 (可选 / Optional, 被 .gitignore 忽略)
+├── migrations/             # 数据库迁移文件
+├── tests/                  # 测试用例
+├── .env.example            # 环境变量示例
 ├── .gitignore              # Git忽略文件
 ├── .gitattributes          # Git配置文件
-├── Dockerfile              # Docker配置 (可选 / Optional)
+├── Dockerfile              # Docker配置，我一般在再上一级写docker-compose.yaml
 ├── README.md               # 项目说明
 └── requirements.txt        # 依赖项
 ```
@@ -52,8 +48,6 @@ fastapi_blank_template/
 ├── app/
 │   ├── __init__.py
 │   └── main.py             # 应用入口
-├── .gitignore              # Git忽略文件（推荐 / Recommended）
-├── README.md               # 项目说明（推荐 / Recommended）
 └── requirements.txt        # 依赖项
 ```
 
@@ -75,29 +69,35 @@ API路由层，处理HTTP请求和响应。按版本组织（如v1, v2）便于A
 
 API routing layer that handles HTTP requests and responses. Organized by versions (e.g., v1, v2) for better API versioning.
 
-#### core/
-
-核心配置和设置，如应用配置、环境变量、日志配置等。
-
-Core configurations and settings like app config, environment variables, logging setup, etc.
-
 #### crud/
 
 数据库CRUD（创建、读取、更新、删除）操作的封装。
 
 Encapsulation of database CRUD (Create, Read, Update, Delete) operations.
 
-#### db/
+#### db_core/
 
 数据库连接、会话管理和通用数据库工具。
 
 Database connections, session management, and general database utilities.
 
-#### deps/
+#### dependencies/
 
 依赖项，如认证依赖、权限检查、分页参数等。用于FastAPI的依赖注入系统。
 
 Dependencies like authentication, permission checks, pagination parameters, etc. Used for FastAPI's dependency injection system.
+
+##### auth/
+
+认证相关依赖。
+
+Authentication-related dependencies.
+
+#### entities/
+
+ORM模型，如SQLAlchemy, Tortoise模型。定义数据库结构和关系。
+
+ORM models like SQLAlchemy , Tortoise models. Defines database structure and relationships.
 
 #### exceptions/
 
@@ -111,12 +111,6 @@ Custom exception classes and exception handlers.
 
 Custom middlewares like request ID generation, logging, performance monitoring, etc.
 
-#### models/
-
-ORM模型，如SQLAlchemy模型。定义数据库结构和关系。
-
-ORM models like SQLAlchemy models. Defines database structure and relationships.
-
 #### schemas/
 
 Pydantic模型，用于请求验证、响应序列化和文档生成。
@@ -128,6 +122,12 @@ Pydantic models for request validation, response serialization, and documentatio
 业务逻辑层，实现核心业务功能，位于API路由和数据访问层之间。
 
 Business logic layer that implements core business functionalities, sitting between API routes and data access.
+
+#### settings/
+
+配置相关模块，如应用设置、环境变量等。
+
+Settings-related modules like app settings, environment variables, etc.
 
 #### tasks/
 
@@ -141,23 +141,11 @@ Asynchronous task definitions like background jobs, scheduled tasks, etc.
 
 General utility functions and helper modules.
 
-### docs/
-
-项目文档，如API文档、架构图、开发指南等。
-
-Project documentation like API docs, architecture diagrams, development guides, etc.
-
 ### migrations/
 
 数据库迁移文件，用于版本化数据库结构变更。
 
 Database migration files for versioning database structure changes.
-
-### static/
-
-静态文件，如图片、CSS、JavaScript等。
-
-Static files like images, CSS, JavaScript, etc.
 
 ### tests/
 
