@@ -1,8 +1,8 @@
 # FastAPI 项目空白模板 / FastAPI Project Blank Template
 
-一个为中小型项目设计的 FastAPI 空白模板，提供了清晰的项目结构，符合个人习惯。
+一个为中小型项目设计的 FastAPI 后端空白模板，提供了清晰的项目结构。本模板采用分层架构设计，严格遵循关注点分离原则，将数据访问、业务逻辑和表示层清晰分开。架构设计遵循依赖倒置原则，通过依赖注入实现模块间的低耦合，便于单元测试和功能扩展。同时支持异步操作和中间件集成，适合构建高性能、可扩展的 RESTful API 服务。
 
-A blank template for FastAPI projects designed for small to medium-sized applications, providing a clear project structure.
+A blank backend template for FastAPI projects designed for small to medium-sized applications, providing a clear project structure. This template follows a layered architecture design, strictly adhering to the separation of concerns principle by clearly separating data access, business logic, and presentation layers. The architecture follows the dependency inversion principle, implementing low coupling between modules through dependency injection, facilitating unit testing and feature extensions. It also supports asynchronous operations and middleware integration, making it suitable for building high-performance, scalable RESTful API services.
 
 ## 项目结构 / Project Structure
 
@@ -13,28 +13,46 @@ fastapi_blank_template/
 │   │   └── v1/             # API版本1
 │   │       ├── __init__.py # 路由注册
 │   │       └── hello.py    # 示例路由
-│   ├── crud/               # 数据库CRUD操作
+│   ├── config/             # 配置相关
 │   ├── db_core/            # 数据库连接和会话
 │   ├── dependencies/       # 依赖项（认证、权限等）
 │   │   └── auth/           # 认证相关依赖
 │   ├── entities/           # ORM模型（SQLAlchemy等）
 │   ├── exceptions/         # 自定义异常和异常处理
 │   ├── middlewares/        # 自定义中间件
+│   ├── repositories/       # 数据库仓库层
 │   ├── schemas/            # Pydantic模型
 │   ├── services/           # 业务逻辑层
-│   ├── settings/           # 配置相关
 │   ├── tasks/              # 异步任务
 │   ├── utils/              # 通用工具函数
 │   ├── __init__.py
 │   └── main.py             # 应用入口
+├── docs/                   # 项目文档
 ├── migrations/             # 数据库迁移文件
 ├── tests/                  # 测试用例
 ├── .env.example            # 环境变量示例
 ├── .gitignore              # Git忽略文件
 ├── .gitattributes          # Git配置文件
-├── Dockerfile              # Docker配置，我一般在再上一级写docker-compose.yaml
+├── Dockerfile              # Docker配置，我一般在上一级写docker-compose.yaml
 ├── README.md               # 项目说明
 └── requirements.txt        # 依赖项
+```
+
+## 核心流程 / Core Process
+
+以下流程图展示了一个在该架构下可能的简化请求响应处理流程:
+
+The following flowchart demonstrates a possible simplified request-response processing flow in this architecture:
+
+
+```
+客户端(Client) → 中间件层(Middlewares) → 路由层(Api) → 依赖注入(Dependencies)
+                                                                 │
+数据层(Entities) ← 仓库层(Repositories) ← 服务层(Services) ←────────┘
+       ↓                                      ↓
+数据库(Database)                         响应模型(Schemas)
+                                              ↓
+                                         客户端(Client)
 ```
 
 ## 最小目录结构 / Minimal Structure
@@ -111,6 +129,12 @@ Custom exception classes and exception handlers.
 
 Custom middlewares like request ID generation, logging, performance monitoring, etc.
 
+#### repositories/
+
+数据库仓库层，封装复杂的数据库查询逻辑。
+
+Database repository layer that encapsulates complex database query logic.
+
 #### schemas/
 
 Pydantic模型，用于请求验证、响应序列化和文档生成。
@@ -123,7 +147,7 @@ Pydantic models for request validation, response serialization, and documentatio
 
 Business logic layer that implements core business functionalities, sitting between API routes and data access.
 
-#### settings/
+#### config/
 
 配置相关模块，如应用设置、环境变量等。
 
@@ -141,6 +165,12 @@ Asynchronous task definitions like background jobs, scheduled tasks, etc.
 
 General utility functions and helper modules.
 
+### docs/
+
+项目文档，包含设计文档、API文档等。
+
+Project documentation including design documents, API documentation, etc.
+
 ### migrations/
 
 数据库迁移文件，用于版本化数据库结构变更。
@@ -153,7 +183,7 @@ Database migration files for versioning database structure changes.
 
 Test cases including unit tests, integration tests, etc.
 
-### 启动应用 / Start the Application
+## 启动应用 / Start the Application
 
 ```
 pip install -r requirements.txt
