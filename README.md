@@ -1,4 +1,4 @@
-# FastAPI 项目空白模板 / FastAPI Project Blank Template
+# FastAPI 后端项目空白模板 / FastAPI Backend Project Blank Template
 
 一个为中小型项目设计的 FastAPI 后端空白模板，提供了清晰的项目结构。本模板采用分层架构设计，严格遵循关注点分离原则，将数据访问、业务逻辑和表示层清晰分开。架构设计遵循依赖倒置原则，通过依赖注入实现模块间的低耦合，便于单元测试和功能扩展。同时支持异步操作和中间件集成，适合构建高性能、可扩展的 RESTful API 服务。
 
@@ -36,23 +36,6 @@ fastapi_blank_template/
 ├── Dockerfile              # Docker配置，我一般在上一级写docker-compose.yaml
 ├── README.md               # 项目说明
 └── requirements.txt        # 依赖项
-```
-
-## 核心流程 / Core Process
-
-以下流程图展示了一个在该架构下可能的简化请求响应处理流程:
-
-The following flowchart demonstrates a possible simplified request-response processing flow in this architecture:
-
-
-```
-客户端(Client) → 中间件层(Middlewares) → 路由层(Api) → 依赖注入(Dependencies)
-                                                                 │
-数据层(Entities) ← 仓库层(Repositories) ← 服务层(Services) ←────────┘
-       ↓                                      ↓
-数据库(Database)                         响应模型(Schemas)
-                                              ↓
-                                         客户端(Client)
 ```
 
 ## 最小目录结构 / Minimal Structure
