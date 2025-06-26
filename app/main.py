@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.v1 import router as api_router
+from app.api.v1 import router as api_v1_router
 
 # 创建 FastAPI 应用
 app = FastAPI(
@@ -13,7 +13,7 @@ async def root():
     return {"message": "Hello World"}
 
 # 注册 API 路由
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_v1_router, prefix="/api/v1")
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,30 +1,68 @@
-# FastAPI 后端项目空白模板 / FastAPI Backend Project Blank Template
+# FastAPI 后端项目空白模板 | Backend Project Blank Template
 
-一个为中小型项目设计的 FastAPI 后端空白模板，提供了清晰的项目结构。本模板采用分层架构设计，严格遵循关注点分离原则，将数据访问、业务逻辑和表示层清晰分开。架构设计遵循依赖倒置原则，通过依赖注入实现模块间的低耦合，便于单元测试和功能扩展。同时支持异步操作和中间件集成，适合构建高性能、可扩展的 RESTful API 服务。
+<div align="center">
 
-A blank backend template for FastAPI projects designed for small to medium-sized applications, providing a clear project structure. This template follows a layered architecture design, strictly adhering to the separation of concerns principle by clearly separating data access, business logic, and presentation layers. The architecture follows the dependency inversion principle, implementing low coupling between modules through dependency injection, facilitating unit testing and feature extensions. It also supports asynchronous operations and middleware integration, making it suitable for building high-performance, scalable RESTful API services.
+![FastAPI Logo](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
 
-## 项目结构 / Project Structure
+一个规范、清晰的 FastAPI 项目**空白模板**，仅提供目录结构参考
+
+*A well-organized, clean FastAPI project **blank template** that provides directory structure reference only*
+
+</div>
+
+## 📚 简介 | Introduction
+
+这是一个由我设计的纯粹**目录结构参考模板**，不包含实际功能代码：
+
+- **仅提供结构** - 文件夹和文件名仅作参考，不含实际业务逻辑
+- **分层架构** - 建议的数据访问、业务逻辑和API层分离结构
+- **实用参考** - 基于常见的FastAPI项目组织方式
+- **灵活定制** - 可根据实际需求裁剪或扩展目录结构
+- **结构清晰** - 为各模块的职责划分提供参考建议
+
+*This is a pure **directory structure reference template** designed by me, without actual functional code.:*
+
+- ***Structure Only** - Folders and file names are for reference only, containing no actual business logic*
+- ***Layered Architecture** - Suggested structure for separating data access, business logic, and API layers*
+- ***Practical Reference** - Based on common FastAPI project organization patterns*
+- ***Flexible Customization** - Structure can be trimmed or expanded based on actual requirements*
+- ***Clear Organization** - Provides reference suggestions for module responsibilities*
+
+## 🗂️ 项目结构 | Project Structure
 
 ```
 fastapi_blank_template/
 ├── app/                    # 应用主目录
 │   ├── api/                # API路由层
-│   │   └── v1/             # API版本1
-│   │       ├── __init__.py # 路由注册
-│   │       └── hello.py    # 示例路由
+│   │   └── v1/             # API版本v1
+│   │       ├── __init__.py # 子路由聚合
+│   │       ├── auth.py     # 认证相关路由
+│   │       └── users.py    # 用户相关路由
 │   ├── config/             # 配置相关
+│   ├── constants/          # 常量定义
+│   │   └── auth_constants.py # 认证相关常量
 │   ├── db_core/            # 数据库连接和会话
 │   ├── dependencies/       # 依赖项（认证、权限等）
 │   │   └── auth/           # 认证相关依赖
-│   ├── entities/           # ORM模型（SQLAlchemy等）
+│   │       └── jwt_provider.py # JWT提供器
+│   ├── models/             # ORM模型（SQLAlchemy等）
 │   ├── exceptions/         # 自定义异常和异常处理
+│   │   ├── auth_errors.py  # 认证相关错误
+│   │   └── handlers.py     # 全局异常处理器
 │   ├── middlewares/        # 自定义中间件
-│   ├── repositories/       # 数据库仓库层
+│   │   └── logging_middleware.py # 日志中间件
+│   ├── dal/                # 数据访问层
+│   │   ├── base_repository.py # 基础仓库
+│   │   └── user_repository.py # 用户仓库
 │   ├── schemas/            # Pydantic模型
+│   │   ├── __init__.py
+│   │   └── users_schemas.py # 用户相关模式
 │   ├── services/           # 业务逻辑层
-│   ├── tasks/              # 异步任务
+│   │   └── user_service.py # 用户服务
+│   ├── task_queues/        # 异步任务
+│   │   └── email_queue.py  # 邮件队列
 │   ├── utils/              # 通用工具函数
+│   │   └── security_utils.py # 安全相关工具
 │   ├── __init__.py
 │   └── main.py             # 应用入口
 ├── docs/                   # 项目文档
@@ -38,25 +76,11 @@ fastapi_blank_template/
 └── requirements.txt        # 依赖项
 ```
 
-## 最小目录结构 / Minimal Structure
-
-对于快速启动和简单示例，只需要以下结构：
-
-For quick start and simple examples, only the following structure is required:
-
-```
-fastapi_blank_template/
-├── app/
-│   ├── __init__.py
-│   └── main.py             # 应用入口
-└── requirements.txt        # 依赖项
-```
-
-> **注意/Note:** 在最小结构中，所有路由都直接定义在 main.py 文件中，无需使用单独的 api 目录。需要注释或删除 main.py 中引入外部路由的代码（如 `from app.api.v1 import router as api_router` 和 `app.include_router(api_router, prefix="/api/v1")`），改为直接在 main.py 中定义路由。
+> **注意/Note:** 上述文件结构中列出的文件名仅提供命名参考，不包含实际代码。您可以根据项目需求自行实现这些文件的内容。
 >
-> In the minimal structure, all routes are defined directly in the main.py file, without using a separate api directory. You need to comment out or remove the code in main.py that imports external routers (such as `from app.api.v1 import router as api_router` and `app.include_router(api_router, prefix="/api/v1")`).
+> The file names listed in the structure above are for reference only and do not contain actual code. You can implement the content of these files according to your project requirements.
 
-## 目录说明 / Directory Explanation
+## 目录说明 | Directory Explanation
 
 ### app/
 
@@ -70,11 +94,11 @@ API路由层，处理HTTP请求和响应。按版本组织（如v1, v2）便于A
 
 API routing layer that handles HTTP requests and responses. Organized by versions (e.g., v1, v2) for better API versioning.
 
-#### crud/
+#### constants/
 
-数据库CRUD（创建、读取、更新、删除）操作的封装。
+常量定义模块，用于存储应用中的常量值。
 
-Encapsulation of database CRUD (Create, Read, Update, Delete) operations.
+Constants definition module for storing constant values used in the application.
 
 #### db_core/
 
@@ -94,7 +118,7 @@ Dependencies like authentication, permission checks, pagination parameters, etc.
 
 Authentication-related dependencies.
 
-#### entities/
+#### models/
 
 ORM模型，如SQLAlchemy, Tortoise模型。定义数据库结构和关系。
 
@@ -112,11 +136,11 @@ Custom exception classes and exception handlers.
 
 Custom middlewares like request ID generation, logging, performance monitoring, etc.
 
-#### repositories/
+#### dal/
 
-数据库仓库层，封装复杂的数据库查询逻辑。
+数据访问层，封装复杂的数据库查询逻辑。
 
-Database repository layer that encapsulates complex database query logic.
+Data access layer that encapsulates complex database query logic.
 
 #### schemas/
 
@@ -136,7 +160,7 @@ Business logic layer that implements core business functionalities, sitting betw
 
 Settings-related modules like app settings, environment variables, etc.
 
-#### tasks/
+#### task_queues/
 
 异步任务定义，如后台作业、定时任务等。
 
@@ -166,7 +190,11 @@ Database migration files for versioning database structure changes.
 
 Test cases including unit tests, integration tests, etc.
 
-## 启动应用 / Start the Application
+> **提示/Tip:** 如果你是FastAPI新手，请参考官方文档学习：https://fastapi.tiangolo.com/
+>
+> If you are new to FastAPI, please refer to the official documentation: https://fastapi.tiangolo.com/
+
+## 启动应用 | Start the Application
 
 ```
 pip install -r requirements.txt
