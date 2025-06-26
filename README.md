@@ -46,6 +46,7 @@ fastapi_blank_template/
 │   │   └── auth/           # 认证相关依赖
 │   │       └── jwt_provider.py # JWT提供器
 │   ├── models/             # ORM模型（SQLAlchemy等）
+│   │   └── user.py         # 用户模型
 │   ├── exceptions/         # 自定义异常和异常处理
 │   │   ├── auth_errors.py  # 认证相关错误
 │   │   └── handlers.py     # 全局异常处理器
