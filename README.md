@@ -4,29 +4,9 @@
 
 ![FastAPI Logo](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
 
-一个规范、清晰的 FastAPI 项目**空白模板**，仅提供目录结构参考
-
-*A well-organized, clean FastAPI project **blank template** that provides directory structure reference only*
+自用目录结构参考
 
 </div>
-
-## 📚 简介 | Introduction
-
-这是一个由我设计的纯粹**目录结构参考模板**，不包含实际功能代码（会随着经历和个人审美而更新）：
-
-- **仅提供结构** - 文件夹和文件名仅作参考，不含实际业务逻辑
-- **分层架构** - 建议的数据访问、业务逻辑和API层分离结构
-- **实用参考** - 基于常见的FastAPI项目组织方式
-- **灵活定制** - 可根据实际需求裁剪或扩展目录结构
-- **结构清晰** - 为各模块的职责划分提供参考建议
-
-*This is a pure **directory structure reference template** designed by me, without actual functional code.:*
-
-- ***Structure Only** - Folders and file names are for reference only, containing no actual business logic*
-- ***Layered Architecture** - Suggested structure for separating data access, business logic, and API layers*
-- ***Practical Reference** - Based on common FastAPI project organization patterns*
-- ***Flexible Customization** - Structure can be trimmed or expanded based on actual requirements*
-- ***Clear Organization** - Provides reference suggestions for module responsibilities*
 
 ## 🗂️ 项目结构 | Project Structure
 
