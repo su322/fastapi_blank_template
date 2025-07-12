@@ -4,7 +4,7 @@
 
 ![FastAPI Logo](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
 
-自用目录结构参考
+自用目录结构参考，随时可能更新。
 
 </div>
 
